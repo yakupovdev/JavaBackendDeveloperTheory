@@ -1,0 +1,316 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+body > [id^="dmermaid-"],
+body > [id^="ddiagram-"],
+body > [id^="ddiagram"],
+body > .mermaidTooltip {
+  position: absolute !important;
+  inset: auto auto 0 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #94a3b8 transparent;
+}
+
+.dark * {
+  scrollbar-color: #525252 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: content-box;
+}
+
+.dark *::-webkit-scrollbar-thumb {
+  background: #525252;
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: content-box;
+}
+
+@layer components {
+  .app-shell {
+    @apply min-h-screen bg-[#f4f6f8] text-slate-900 dark:bg-[#0c0d0f] dark:text-neutral-100;
+  }
+
+  .app-header {
+    @apply sticky top-0 z-40 border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-[#111214]/95 dark:shadow-none;
+  }
+
+  .header-inner {
+    @apply flex min-h-16 items-center gap-3 px-4 lg:px-6;
+  }
+
+  .brand-block {
+    @apply flex min-w-0 flex-1 items-center gap-3;
+  }
+
+  .brand-icon {
+    @apply hidden h-10 w-10 shrink-0 items-center justify-center rounded-md border border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-900/70 dark:bg-amber-950/30 dark:text-amber-300 sm:inline-flex;
+  }
+
+  .brand-block h1 {
+    @apply truncate text-base font-bold text-slate-950 dark:text-neutral-50;
+  }
+
+  .brand-block p {
+    @apply hidden truncate text-xs text-slate-500 dark:text-neutral-300 md:block;
+  }
+
+  .header-actions {
+    @apply flex shrink-0 items-center gap-2;
+  }
+
+  .search-shell {
+    @apply relative w-full max-w-xl;
+  }
+
+  .mobile-search {
+    @apply px-4 pb-3;
+  }
+
+  .icon-button {
+    @apply inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-amber-700/70 dark:hover:bg-neutral-800;
+  }
+
+  .control-button {
+    @apply inline-flex h-10 shrink-0 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-amber-700/70 dark:hover:bg-neutral-800;
+  }
+
+  .search-input {
+    @apply h-10 w-full rounded-md border border-slate-200 bg-white pl-10 pr-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-ember focus:ring-2 focus:ring-amber-500/15 dark:border-neutral-700 dark:bg-[#18191c] dark:text-neutral-100 dark:placeholder:text-neutral-500 dark:focus:border-amber-500 dark:focus:ring-amber-500/20;
+  }
+
+  .sidebar-shell {
+    @apply flex h-full w-[21.5rem] flex-col border-r border-slate-200 bg-white dark:border-neutral-800 dark:bg-[#101113];
+  }
+
+  .nav-item {
+    @apply flex w-full items-center justify-between gap-3 rounded-md px-3 py-2.5 text-left text-sm font-medium leading-5 text-slate-600 transition hover:bg-slate-100 hover:text-slate-950 dark:text-neutral-300 dark:hover:bg-neutral-900 dark:hover:text-neutral-50;
+  }
+
+  .nav-item > span:first-child {
+    min-width: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .nav-item-active {
+    @apply bg-amber-50 text-amber-800 shadow-sm ring-1 ring-amber-200 dark:bg-amber-950/25 dark:text-amber-300 dark:ring-amber-900/50;
+  }
+
+  .nav-stage {
+    @apply shrink-0 rounded border border-slate-200 bg-white px-1.5 py-0.5 text-[10px] font-bold uppercase leading-none text-slate-400 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-500;
+  }
+
+  .page-shell {
+    @apply mx-auto max-w-6xl px-4 py-6 lg:px-8;
+  }
+
+  .topic-hero {
+    @apply mb-8 grid gap-5 rounded-lg border border-slate-200 bg-white p-5 shadow-soft dark:border-neutral-800 dark:bg-[#151619] md:p-6 xl:grid-cols-[minmax(0,1fr)_20rem];
+  }
+
+  .topic-hero h2 {
+    @apply text-3xl font-bold leading-tight text-slate-950 dark:text-neutral-50 md:text-5xl;
+  }
+
+  .topic-hero p {
+    @apply mt-5 max-w-4xl text-base leading-8 text-slate-600 dark:text-neutral-200 md:text-lg;
+  }
+
+  .topic-pill {
+    @apply inline-flex min-h-8 items-center gap-2 rounded-md border border-amber-200 bg-amber-50 px-3 text-xs font-bold uppercase tracking-wide text-amber-800 dark:border-amber-900/80 dark:bg-amber-950/40 dark:text-amber-300;
+  }
+
+  .topic-pill.muted {
+    @apply border-slate-200 bg-slate-50 text-slate-500 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-400;
+  }
+
+  .topic-stats {
+    @apply grid grid-cols-2 gap-3;
+  }
+
+  .topic-stat {
+    @apply min-h-24 rounded-lg border border-slate-200 bg-slate-50 p-3 text-slate-600 dark:border-neutral-800 dark:bg-[#101113] dark:text-neutral-300;
+  }
+
+  .topic-stat svg {
+    @apply mb-3 text-amber-600 dark:text-amber-400;
+  }
+
+  .topic-stat strong {
+    @apply block text-2xl font-bold leading-none text-slate-950 dark:text-neutral-50;
+  }
+
+  .topic-stat span {
+    @apply mt-2 block text-xs font-semibold uppercase leading-4 text-slate-500 dark:text-neutral-400;
+  }
+
+  .learning-grid {
+    @apply grid gap-5 xl:grid-cols-[minmax(0,0.95fr)_minmax(22rem,0.75fr)];
+  }
+
+  .mechanics-grid {
+    @apply grid gap-3 sm:grid-cols-2 xl:grid-cols-1;
+  }
+
+  .mechanic-card {
+    @apply rounded-lg border border-slate-200 bg-white p-4 shadow-soft dark:border-neutral-800 dark:bg-[#151619];
+  }
+
+  .mechanic-card span {
+    @apply mb-3 inline-flex h-7 w-9 items-center justify-center rounded-md bg-amber-50 font-mono text-xs font-bold text-ember dark:bg-amber-950/30 dark:text-amber-400;
+  }
+
+  .mechanic-card p {
+    @apply max-w-none text-sm leading-7 text-slate-600 dark:text-neutral-200;
+  }
+
+  .details-stack {
+    @apply grid gap-4 lg:grid-cols-2;
+  }
+
+  .detail-panel {
+    @apply rounded-lg border border-slate-200 bg-white p-5 shadow-soft dark:border-neutral-800 dark:bg-[#151619];
+  }
+
+  .detail-panel h4 {
+    @apply mb-3 text-base font-bold text-slate-950 dark:text-neutral-50;
+  }
+
+  .detail-panel ul {
+    @apply space-y-3;
+  }
+
+  .detail-panel li {
+    @apply list-none border-l-2 border-amber-300 pl-3 text-sm leading-7 text-slate-600 dark:border-amber-700 dark:text-neutral-200;
+  }
+
+  .chapter-list {
+    @apply space-y-5;
+  }
+
+  .chapter-panel {
+    @apply flex gap-4 rounded-lg border border-slate-200 bg-white p-5 shadow-soft dark:border-neutral-800 dark:bg-[#151619];
+  }
+
+  .chapter-index {
+    @apply hidden h-10 w-12 shrink-0 items-center justify-center rounded-md bg-amber-50 font-mono text-sm font-bold text-ember dark:bg-amber-950/30 dark:text-amber-400 sm:flex;
+  }
+
+  .chapter-panel h4 {
+    @apply mb-3 text-lg font-bold text-slate-950 dark:text-neutral-50;
+  }
+
+  .chapter-panel p {
+    @apply mb-4 max-w-none text-sm leading-7 text-slate-600 dark:text-neutral-200;
+  }
+
+  .chapter-panel ul {
+    @apply mb-4 grid gap-3 md:grid-cols-2;
+  }
+
+  .chapter-panel li {
+    @apply list-none rounded-md border border-slate-200 bg-slate-50 p-3 text-sm leading-7 text-slate-600 dark:border-neutral-800 dark:bg-[#101113] dark:text-neutral-200;
+  }
+
+  .content-section {
+    @apply mb-10;
+  }
+
+  .content-section h3 {
+    @apply mb-4 text-xl font-bold text-slate-950 dark:text-neutral-50;
+  }
+
+  .content-section p {
+    @apply max-w-4xl text-base leading-8 text-slate-600 dark:text-neutral-200;
+  }
+
+  .diagram {
+    @apply relative isolate overflow-auto rounded-lg border border-slate-200 bg-white p-3 shadow-soft dark:border-neutral-800 dark:bg-[#151619] md:p-5;
+  }
+
+  .diagram svg {
+    display: block;
+    max-width: 100%;
+    min-width: min(640px, 100%);
+    height: auto;
+  }
+
+  .code-shell {
+    @apply mb-4 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-soft dark:border-neutral-800 dark:bg-[#101113];
+  }
+
+  .code-toolbar {
+    @apply flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-2 dark:border-neutral-800 dark:bg-[#151619];
+  }
+
+  .copy-button {
+    @apply inline-flex items-center gap-2 rounded-md border border-slate-200 px-2.5 py-1.5 text-xs font-semibold text-slate-600 transition hover:border-slate-300 hover:bg-slate-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800;
+  }
+
+  .table-shell {
+    @apply overflow-x-auto rounded-lg border border-slate-200 bg-white shadow-soft dark:border-neutral-800 dark:bg-[#151619];
+  }
+
+  .method-table {
+    @apply w-full min-w-[42rem] border-collapse text-left text-sm;
+  }
+
+  .method-table tr {
+    @apply border-b border-slate-200 last:border-0 dark:border-neutral-800;
+  }
+
+  .method-table th {
+    @apply w-1/3 bg-slate-50 px-4 py-3 font-mono text-slate-900 dark:bg-[#101113] dark:text-neutral-100;
+  }
+
+  .method-table td {
+    @apply px-4 py-3 leading-6 text-slate-600 dark:text-neutral-200;
+  }
+
+  .faq-item {
+    @apply overflow-hidden rounded-lg border border-slate-200 bg-white shadow-soft dark:border-neutral-800 dark:bg-[#151619];
+  }
+
+  .faq-trigger {
+    @apply flex w-full items-center justify-between gap-4 px-4 py-3 text-left font-semibold text-slate-900 transition hover:bg-slate-50 dark:text-neutral-50 dark:hover:bg-neutral-900;
+  }
+
+  .faq-answer {
+    @apply border-t border-slate-200 px-4 py-3 leading-7 text-slate-600 dark:border-neutral-800 dark:text-neutral-200;
+  }
+}
