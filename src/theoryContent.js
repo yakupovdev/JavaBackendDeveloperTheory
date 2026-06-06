@@ -1,4 +1,5 @@
 import { seniorChapterExpansions, seniorInterviewTopics } from './seniorTheoryContent.js';
+import { databaseSeniorChapterExpansions, databaseSeniorTopics } from './databaseSeniorContent.js';
 
 const faq = (enQ, ruQ, enA, ruA) => ({
   question: { en: enQ, ru: ruQ },
@@ -1483,10 +1484,13 @@ content.forEach((topic) => {
   }
 });
 
-content.push(...seniorInterviewTopics);
+content.push(...seniorInterviewTopics, ...databaseSeniorTopics);
 
 content.forEach((topic) => {
-  const extraChapters = seniorChapterExpansions[topic.id];
+  const extraChapters = [
+    ...(seniorChapterExpansions[topic.id] || []),
+    ...(databaseSeniorChapterExpansions[topic.id] || []),
+  ];
   if (extraChapters?.length) {
     topic.chapters = [...extraChapters, ...(topic.chapters || [])];
   }
